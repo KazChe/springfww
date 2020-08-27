@@ -1,12 +1,28 @@
 package com.kc.springwebapp.domain;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 public class Book {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String title;
     private String isbn;
-    private Set<Author> author;
+
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Book() {
     }
@@ -33,11 +49,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Set<Author> getAuthor() {
-        return author;
+    public Set<Author> getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(Set<Author> author) {
-        this.author = author;
+    public void setAuthors(Set<Author> author) {
+        this.authors = authors;
     }
 }
