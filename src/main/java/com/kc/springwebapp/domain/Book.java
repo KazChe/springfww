@@ -1,6 +1,7 @@
 package com.kc.springwebapp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,7 @@ public class Book {
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -27,10 +28,10 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String isbn, Set<Author> author) {
+    public Book(String title, String isbn){ //}, Set<Author> author) {
         this.title = title;
         this.isbn = isbn;
-        this.author = author;
+//        this.author = author;
     }
 
     public String getTitle() {
