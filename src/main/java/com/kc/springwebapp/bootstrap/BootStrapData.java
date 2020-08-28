@@ -26,28 +26,41 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        Publisher publisher = new Publisher();
+        publisher.setName("Oreilly");
+        publisher.setCity("San Jose");
+        publisher.setState("California");
+
+        publisherRepository.save(publisher);
+
         Author kaz = new Author("kaz", "che");
         Book cupcake = new Book("Rainbow Cupcake", "7777");
         kaz.getBooks().add(cupcake);
         cupcake.getAuthors().add(kaz);
 
+        cupcake.setPublisher(publisher);
+        publisher.getBooks().add(cupcake);
+
         authorRepository.save(kaz);
         bookRepository.save(cupcake);
+        publisherRepository.save(publisher);
 
         Author kimia = new Author("Kimia", "Chehresa");
         Book fucktrump = new Book("Fuck Trump", "54345");
         kimia.getBooks().add(fucktrump);
         fucktrump.getAuthors().add(kimia);
 
+        fucktrump.setPublisher(publisher);
+        publisher.getBooks().add(fucktrump);
+
         authorRepository.save(kimia);
         bookRepository.save(fucktrump);
+        publisherRepository.save(publisher);
 
-//        Publisher publisher = new Publisher("Orighty","666 West 95th Overland Park, KS, 66212");
-//        publisher.setId(new Long(123));
-//        publisherRepository.save(publisher);
 
         System.out.println("Started Bootstrap...");
-        System.out.println("Number of Publishers:" + publisherRepository.count());
+        System.out.println("Number of Publishers:" + publisher.getBooks().size());
         System.out.println("Number of books:" + bookRepository.count());
         System.out.println("Number of authors:" + authorRepository.count());
     }
