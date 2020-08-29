@@ -7,7 +7,7 @@
 <body>
 <h1>Authors List</h1>
 
-<table>
+<table border="1">
     <tr>
         <th>ID</th>
         <th>First Name</th>
@@ -15,8 +15,8 @@
     </tr>
     <tr th:each="author : ${authors}">
         <td th:text="${author.id}">123</td>
-        <td th:text="${author.name}"> Spring in Action</td>
-        <td th:text="${author.lastName}">Wrox</td>
+        <td th:text="${author.firstName}"></td>
+        <td th:text="${author.lastName}"></td>
     </tr>
 </table>
 
